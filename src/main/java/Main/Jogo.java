@@ -27,7 +27,16 @@ public class Jogo {
     }
     
     public static String[] tabuleiro() {
-        String[] tabuleiro = {"| ","| ","Z"};
+        String[] tabuleiro = {"|_","|_","|_|",
+                              "|_","|_","|_|",
+                              "|_","|_","|_|"};
+        for (int pos = 0; pos < 8) {
+            if (pos == 3 || pos == 6 || pos == 9) {
+               System.println(tabuleiro[pos] + "\n");   
+            } else {
+               System.println(tabuleiro[pos] + " ");
+            }
+        }
         
         return tabuleiro;
     }
