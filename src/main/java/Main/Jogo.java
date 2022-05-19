@@ -37,16 +37,20 @@ public class Jogo {
         while (jogadas > 0) { 
             mostraTabuleiro(tabuleiro);
             System.out.println();
+            if (jogadas == 9) {
+                tabuleiro = atualizaTabuleiro(tabuleiro);
+            }
             
-            posJogada = joga(quemJoga);
+            posJogada = joga(quemJoga, tabuleiro);
             
-            mandaJogada(tabuleiro, posJogada);
+            tabuleiro = mandaJogada(tabuleiro, posJogada, jogadas);
             
             verificaVencedor(tabuleiro, quemJoga);
             
             quemJoga = proxJoga(quemJoga);
             jogadas--;
         }
+        mostraTabuleiro(tabuleiro);
     }
     
     public static String[] criaTabuleiro() {
@@ -64,6 +68,17 @@ public class Jogo {
                System.out.print(tabuleiro[pos]);
             }
         }
+    }
+    
+    public static String[] atualizaTabuleiro(String[] tabuleiro) {
+        for (int pos = 0; pos < 9; pos++) {
+            if (pos == 2 || pos == 5 || pos == 8) {
+                tabuleiro[pos] = "|_|";
+            } else {
+                tabuleiro[pos] = "|_";
+            }
+        }
+        return tabuleiro;
     }
     
     public static String quenheP1() {
@@ -85,27 +100,81 @@ public class Jogo {
         } else {
             System.out.println("| Primeiro a jogar: " + nomeP2);
         }
+        System.out.println("Você é \"X\"");
         return quemComeca;
     }
     
-    public static int joga(double quemJoga) {
+    public static int joga(double quemJoga, String[] tabuleiro) {
         int posJogada;
+        boolean jaFoiEscolhida;
+        boolean podePassar;
+        
         if (quemJoga == 0) {
             System.out.println(strEntPosP1);
-            posJogada = ent.nextInt();
         } else {
             System.out.println(strEntPosP2);
-            posJogada = ent.nextInt();
         }
+        do {
+            posJogada = ent.nextInt();
+            posJogada = (posJogada - 1);
+            podePassar = confereJogada(posJogada, tabuleiro);
+        } while (!podePassar);
         return posJogada;
+    }
+    
+    public static boolean confereJogada(int posJogada, String[] tabuleiro) {
+        String strPosInvalida = "| Posição Inválida! Deve ser entre 1 e 9 ";
+        String strJaFoiEscolhida = "| Posição já foi escolhida antes! ";
+        String strInsNovamente = "| Insira novamente: ";
+        boolean podePassar;
+        if (posJogada < 0 || posJogada > 8) {
+            System.out.println(strPosInvalida + "\n" + strInsNovamente);
+            podePassar = false;
+        } else {
+            podePassar = true;
+        }
+        if (jaFoiEscolhida(posJogada, tabuleiro)) {
+            System.out.println(strJaFoiEscolhida + "\n" + strInsNovamente);
+            podePassar = false;
+        } else {
+            podePassar = true;
+        }
+        return podePassar;
+    }
+    
+    public static boolean jaFoiEscolhida(int posJogada, String[] tabuleiro) {
+        boolean jaFoiEscolhida = false;
+        if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+            if (!tabuleiro[posJogada].equals("|_|")) {
+                jaFoiEscolhida = true;
+            }
+        } else {
+            if (!tabuleiro[posJogada].equals("|_")) {
+                jaFoiEscolhida = true;
+            }
+        }
+        return jaFoiEscolhida;
     }
     
     public static void verificaVencedor(String[] tabuleiro, double quemJoga) {
         
     }
     
-    public static void mandaJogada(String[] tabuleiro, int posJogada) {
-        
+    public static String[] mandaJogada(String[] tabuleiro, int posJogada, int jogadas) {
+        if (jogadas%2 == 1) {
+            if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+                tabuleiro[posJogada] = "|X|";
+            } else {
+                tabuleiro[posJogada] = "|X";
+            }
+        } else {
+            if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+                tabuleiro[posJogada] = "|O|";
+            } else {
+                tabuleiro[posJogada] = "|O";
+            }
+        }
+        return tabuleiro;
     }
     
     public static double proxJoga(double quemJoga) {
