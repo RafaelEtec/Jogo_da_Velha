@@ -61,6 +61,81 @@ public class JogoBiDi {
         mostraTabuleiro(tabuleiro, tab);
     }
     
+    public static int[] converteJogada(int posJogada) {
+        int[] jogadaConvertida = new int[2];
+        switch (posJogada) {
+            case 0:
+                jogadaConvertida[0] = 0;
+                jogadaConvertida[1] = 0;
+                break;
+            case 1:
+                jogadaConvertida[0] = 0;
+                jogadaConvertida[1] = 1;
+                break;
+            case 2:
+                jogadaConvertida[0] = 0;
+                jogadaConvertida[1] = 2;
+                break;
+            case 3:
+                jogadaConvertida[0] = 1;
+                jogadaConvertida[1] = 0;
+                break;
+            case 4:
+                jogadaConvertida[0] = 1;
+                jogadaConvertida[1] = 1;
+                break;
+            case 5:
+                jogadaConvertida[0] = 1;
+                jogadaConvertida[1] = 2;
+                break;
+            case 6:
+                jogadaConvertida[0] = 2;
+                jogadaConvertida[1] = 0;
+                break;
+            case 7:
+                jogadaConvertida[0] = 2;
+                jogadaConvertida[1] = 1;
+                break;
+            case 8:
+                jogadaConvertida[0] = 2;
+                jogadaConvertida[1] = 2;
+                break;
+        }
+        return jogadaConvertida;
+    }
+    
+    public static String[][] mandaJogada(String[][] tabuleiro, int posJogada, int jogadas) {
+        int[] jogadaConvertida = converteJogada(posJogada);
+        int li = jogadaConvertida[0];
+        int co = jogadaConvertida[1];
+        if (jogadas%2 == 1) {
+            if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+                tabuleiro[li][co] = "|X|";
+            } else {
+                tabuleiro[li][co] = "|X";
+            }
+        } else {
+            if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+                tabuleiro[li][co] = "|O|";
+            } else {
+                tabuleiro[li][co] = "|O";
+            }
+        }
+        return tabuleiro;
+    }
+    
+    public static int[][] tabuleiroAux(int[][] tab, int posJogada, int jogadas) {
+        int[] jogadaConvertida = converteJogada(posJogada);
+        int li = jogadaConvertida[0];
+        int co = jogadaConvertida[1];
+        if (jogadas%2 == 1) {
+            tab[li][co] = 0;
+        } else {
+            tab[li][co] = 1;
+        }
+        return tab;
+    }
+    
     public static int joga(double quemJoga, String[][] tabuleiro) {
         int posJogada;
         boolean podePassar;
@@ -78,13 +153,96 @@ public class JogoBiDi {
         return posJogada;
     }
     
+    //    |1|2|3|
+    //    |4|5|6|
+    //    |7|8|9|
+    // ----0-1-2---------------------------------------------------------------
+    //  0 |0|1|2| /
+    //  1 |3|4|5| /
+    //  2 |6|7|8| /
+    
+    public static boolean verificaVencedor(int[][] tab, double quemJoga, int jogadas) {
+        boolean ganhou = false;
+        String ganhador;
+        if (quemJoga == 0) {
+            ganhador = nomeP1;
+        } else {
+            ganhador = nomeP2;
+        }
+        
+        if (jogadas <= 5) {
+            // Horizontal
+            if        (tab[0][0] == 0 && tab[0][1] == 0 && tab[0][2] == 0 || tab[0][0] == 1 && tab[0][1] == 1 && tab[0][2] == 1) {
+                ganhou = true;
+            } else if (tab[1][0] == 0 && tab[1][1] == 0 && tab[1][2] == 0 || tab[1][0] == 1 && tab[1][1] == 1 && tab[1][2] == 1) {
+                ganhou = true;
+            } else if (tab[2][0] == 0 && tab[2][1] == 0 && tab[2][2] == 0 || tab[2][0] == 1 && tab[2][1] == 1 && tab[2][2] == 1) {
+                ganhou = true;
+            }
+            //Vertical
+            if        (tab[0][0] == 0 && tab[1][0] == 0 && tab[2][0] == 0 || tab[0][0] == 1 && tab[1][0] == 1 && tab[2][0] == 1) {
+                ganhou = true;
+            } else if (tab[0][1] == 0 && tab[1][1] == 0 && tab[2][1] == 0 || tab[0][1] == 1 && tab[1][1] == 1 && tab[2][1] == 1) {
+                ganhou = true;
+            } else if (tab[0][2] == 0 && tab[1][2] == 0 && tab[2][2] == 0 || tab[0][2] == 1 && tab[1][2] == 1 && tab[2][2] == 1) {
+                ganhou = true;
+            }
+            // Diagonal
+            if        (tab[0][0] == 0 && tab[1][1] == 0 && tab[2][2] == 0 || tab[0][0] == 1 && tab[1][1] == 1 && tab[2][2] == 1) {
+                ganhou = true;
+            } else if (tab[0][2] == 0 && tab[1][1] == 0 && tab[2][0] == 0 || tab[0][2] == 1 && tab[1][1] == 1 && tab[2][0] == 1) {
+                ganhou = true;
+            }
+        }
+        if (ganhou) {
+            System.out.println("| "+ ganhador + " Venceu!");
+        }
+        return ganhou;
+    }
+    
+    public static boolean confereJogada(int posJogada, String[][] tabuleiro) {
+        String strPosInvalida =    "| Posição Inválida! Deve ser entre 1 e 9    |";
+        String strJaFoiEscolhida = "| Posição já foi escolhida antes!           |";
+        String strInsNovamente =   "| Insira novamente:                         |";
+        boolean podePassar;
+        if (posJogada < 0 || posJogada > 8) {
+            System.out.println(strPosInvalida + "\n" + strInsNovamente);
+            podePassar = false;
+        } else {
+            if (jaFoiEscolhida(posJogada, tabuleiro)) {
+                System.out.println(strJaFoiEscolhida + "\n" + strInsNovamente);
+                podePassar = false;
+            } else {
+                podePassar = true;
+            }
+        }
+        return podePassar;
+    }
+    
+    public static boolean jaFoiEscolhida(int posJogada, String[][] tabuleiro) {
+        int[] jogadaConvertida = converteJogada(posJogada);
+        int li = jogadaConvertida[0];
+        int co = jogadaConvertida[1];
+        boolean jaFoiEscolhida = false;
+        if (posJogada == 2 || posJogada == 5 || posJogada == 8) {
+            if (!tabuleiro[li][co].equals("|_|")) {
+                jaFoiEscolhida = true;
+            }
+        } else {
+            if (!tabuleiro[li][co].equals("|_")) {
+                jaFoiEscolhida = true;
+            }
+        }
+        return jaFoiEscolhida;
+    }
+    
     public static String[][] atualizaTabuleiro(String[][] tabuleiro) {
         for (int lin = 0; lin < 3; lin++) {
             for (int col = 0; col < 3; col++) {
                 if (col == 2 || col == 5 || col == 8) {
-                    tabuleiro[lin][col] = "| |";
+                    tabuleiro[lin][col] = "|_|";
                 } else {
-                    tabuleiro[lin][col] = "| ";
+                    tabuleiro[lin][col] = "|_";
                 }
             }
         }
@@ -95,9 +253,9 @@ public class JogoBiDi {
         for (int lin = 0; lin < 3; lin++) {
             for (int col = 0; col < 3; col++) {
                 if (col == 2 || col == 5) {
-                    System.out.println(tabuleiro[lin][col] + "\n");
+                    System.out.print(tabuleiro[lin][col] + "\n");
                 } else {
-                    System.out.println(tabuleiro[lin][col]);
+                    System.out.print(tabuleiro[lin][col]);
                 }
             }
         }
@@ -151,5 +309,14 @@ public class JogoBiDi {
         }
         System.out.println("| Você é \"X\"                                |");
         return quemComeca;
+    }
+    
+    public static double proxJoga(double quemJoga) {
+        if (quemJoga == 0) {
+            quemJoga = 1;
+        } else {
+            quemJoga = 0;
+        }
+        return quemJoga;
     }
 }
