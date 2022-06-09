@@ -249,6 +249,10 @@ public class JogoGui extends javax.swing.JFrame {
         if (confereNomes()) {
             nomeP1 = jTF_P1.getText();
             nomeP2 = jTF_P2.getText();
+            
+            Jogar jogo = new Jogar();
+            jogo.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jB_JogarActionPerformed
 
