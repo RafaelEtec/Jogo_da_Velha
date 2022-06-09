@@ -4,17 +4,27 @@
  */
 package Main;
 
+import java.awt.Color;
+
 /**
  *
  * @author raf
  */
 public class Jogar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Jogar
-     */
+    private static double quemJoga;
+    private static int jogada = 9;
+    private static int[] grid = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+    
     public Jogar() {
         initComponents();
+        limpaTudo();
+        habilitaTudo();
+        quemJoga = quemComeca();
+        resetaGrid();
+    }
+    
+    private void limpaTudo() {
         jB_1.setText("");
         jB_2.setText("");
         jB_3.setText("");
@@ -25,7 +35,35 @@ public class Jogar extends javax.swing.JFrame {
         jB_8.setText("");
         jB_9.setText("");
     }
+    
+    private void habilitaTudo() {
+        jB_1.setEnabled(true);
+        jB_2.setEnabled(true);
+        jB_3.setEnabled(true);
+        jB_4.setEnabled(true);
+        jB_5.setEnabled(true);
+        jB_6.setEnabled(true);
+        jB_7.setEnabled(true);
+        jB_8.setEnabled(true);
+        jB_9.setEnabled(true);
+        jB_1.setBackground(new Color(255,255,255));
+        jB_2.setBackground(new Color(255,255,255));
+        jB_3.setBackground(new Color(255,255,255));
+        jB_4.setBackground(new Color(255,255,255));
+        jB_5.setBackground(new Color(255,255,255));
+        jB_6.setBackground(new Color(255,255,255));
+        jB_7.setBackground(new Color(255,255,255));
+        jB_8.setBackground(new Color(255,255,255));
+        jB_9.setBackground(new Color(255,255,255));
+    }
 
+    private void resetaGrid() {
+        for (int pos = 0; pos < grid.length; pos++) {
+            grid[pos] = -1;
+        }
+        jogada = 9;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +103,7 @@ public class Jogar extends javax.swing.JFrame {
         jL_MensagemJogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jP_Background.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -472,8 +511,34 @@ public class Jogar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public double proxJoga() {
+        String strMsg = "É a vez de: ";
+        if (quemJoga == 0) {
+            quemJoga = 1;
+            strMsg = strMsg + JogoGui.nomeP2;
+        } else {
+            quemJoga = 0;
+            strMsg = strMsg + JogoGui.nomeP1;
+        }
+        jL_MensagemJogo.setText(strMsg);
+        return quemJoga;
+    }
+    
+    private double quemComeca() {
+        double quemComeca = Math.round(Math.random());
+        String strMsg = "O Primeiro a Jogar será: ";
+        if (quemComeca == 0) {
+            strMsg = strMsg + JogoGui.nomeP1;
+        } else {
+            strMsg = strMsg + JogoGui.nomeP2;
+        }
+        jL_MensagemJogo.setText(strMsg);
+        return quemComeca;
+    }
+    
     private void jB_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_MenuActionPerformed
         JogoGui menu = new JogoGui();
         menu.setVisible(true);
@@ -481,43 +546,187 @@ public class Jogar extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_MenuActionPerformed
 
     private void joga(int botao) {
+        boolean ganhou = false;
+        if (jogada > 0) {
+            mandaJogada(botao);
+            mudaBotao(botao);
+            ganhou = verificaVencedor();
+            if (ganhou) {
+                desabilitaBotoes();
+                resetaGrid();
+            } else {
+                proxJoga();
+                jogada--;
+            }
+        }
         
+        if (jogada == 0 && !ganhou) {
+            jL_MensagemJogo.setText("Empate! Ninguém venceu.");
+            resetaGrid();
+        }
+    }
+    
+    private void desabilitaBotoes() {
+        jB_1.setEnabled(false);
+        jB_2.setEnabled(false);
+        jB_3.setEnabled(false);
+        jB_4.setEnabled(false);
+        jB_5.setEnabled(false);
+        jB_6.setEnabled(false);
+        jB_7.setEnabled(false);
+        jB_8.setEnabled(false);
+        jB_9.setEnabled(false);
+    }
+    
+    private boolean verificaVencedor() {
+        boolean ganhou = false;
+        String ganhador;
+        if (quemJoga == 0) {
+            ganhador = JogoGui.nomeP1;
+        } else {
+            ganhador = JogoGui.nomeP2;
+        }
+        if (jogada <= 5) {
+            // Horizontal
+            if        (grid[0] == 0 && grid[1] == 0 && grid[2] == 0 || grid[0] == 1 && grid[1] == 1 && grid[2] == 1) {
+                ganhou = true;
+                jP_B1.setBackground(Color.red);
+                jP_B2.setBackground(Color.red);
+                jP_B3.setBackground(Color.red);
+            } else if (grid[3] == 0 && grid[4] == 0 && grid[5] == 0 || grid[3] == 1 && grid[4] == 1 && grid[5] == 1) {
+                ganhou = true;
+                jP_B4.setBackground(Color.red);
+                jP_B5.setBackground(Color.red);
+                jP_B6.setBackground(Color.red);
+            } else if (grid[6] == 0 && grid[7] == 0 && grid[8] == 0 || grid[6] == 1 && grid[7] == 1 && grid[8] == 1) {
+                ganhou = true;
+                jP_B7.setBackground(Color.red);
+                jP_B8.setBackground(Color.red);
+                jP_B9.setBackground(Color.red);
+            }
+            //Vertical
+            if        (grid[0] == 0 && grid[3] == 0 && grid[6] == 0 || grid[0] == 1 && grid[3] == 1 && grid[6] == 1) {
+                ganhou = true;
+                jP_B1.setBackground(Color.red);
+                jP_B4.setBackground(Color.red);
+                jP_B7.setBackground(Color.red);
+            } else if (grid[1] == 0 && grid[4] == 0 && grid[7] == 0 || grid[1] == 1 && grid[4] == 1 && grid[7] == 1) {
+                ganhou = true;
+                jP_B2.setBackground(Color.red);
+                jP_B5.setBackground(Color.red);
+                jP_B8.setBackground(Color.red);
+            } else if (grid[2] == 0 && grid[5] == 0 && grid[8] == 0 || grid[2] == 1 && grid[5] == 1 && grid[8] == 1) {
+                ganhou = true;
+                jP_B3.setBackground(Color.red);
+                jP_B6.setBackground(Color.red);
+                jP_B9.setBackground(Color.red);
+            }
+            // Diagonal
+            if        (grid[0] == 0 && grid[4] == 0 && grid[8] == 0 || grid[0] == 1 && grid[4] == 1 && grid[8] == 1) {
+                ganhou = true;
+                jP_B1.setBackground(Color.red);
+                jP_B5.setBackground(Color.red);
+                jP_B9.setBackground(Color.red);
+            } else if (grid[2] == 0 && grid[4] == 0 && grid[6] == 0 || grid[2] == 1 && grid[4] == 1 && grid[6] == 1) {
+                ganhou = true;
+                jP_B3.setBackground(Color.red);
+                jP_B5.setBackground(Color.red);
+                jP_B7.setBackground(Color.red);
+            }
+        }
+        if (ganhou) {
+            jL_MensagemJogo.setText("Vencedor: " + ganhador + " ,Parabéns!");
+        }
+        return ganhou;
+    }
+    
+    private void mudaBotao(int botao) {
+        String xisBola = "X";
+        if (quemJoga == 1) {
+            xisBola = "O";
+        }
+        switch (botao) {
+            case 0:
+                jB_1.setText(xisBola);
+                break;
+            case 1:
+                jB_2.setText(xisBola);
+                break;
+            case 2:
+                jB_3.setText(xisBola);
+                break;
+            case 3:
+                jB_4.setText(xisBola);
+                break;
+            case 4:
+                jB_5.setText(xisBola);
+                break;
+            case 5:
+                jB_6.setText(xisBola);
+                break;
+            case 6:
+                jB_7.setText(xisBola);
+                break;
+            case 7:
+                jB_8.setText(xisBola);
+                break;
+            case 8:
+                jB_9.setText(xisBola);
+                break;
+        }
+    }
+    
+    private void mandaJogada(int botao) {
+        if (jogada%2 == 1) {
+            grid[botao] = 0;
+        } else {
+            grid[botao] = 1;
+        }
     }
     
     private void jB_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_1ActionPerformed
         joga(0);
+        jB_1.setEnabled(false);
     }//GEN-LAST:event_jB_1ActionPerformed
 
     private void jB_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_2ActionPerformed
         joga(1);
+        jB_2.setEnabled(false);
     }//GEN-LAST:event_jB_2ActionPerformed
 
     private void jB_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_3ActionPerformed
         joga(2);
+        jB_3.setEnabled(false);
     }//GEN-LAST:event_jB_3ActionPerformed
 
     private void jB_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_4ActionPerformed
         joga(3);
+        jB_4.setEnabled(false);
     }//GEN-LAST:event_jB_4ActionPerformed
 
     private void jB_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_5ActionPerformed
         joga(4);
+        jB_5.setEnabled(false);
     }//GEN-LAST:event_jB_5ActionPerformed
 
     private void jB_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_6ActionPerformed
         joga(5);
+        jB_6.setEnabled(false);
     }//GEN-LAST:event_jB_6ActionPerformed
 
     private void jB_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_7ActionPerformed
         joga(6);
+        jB_7.setEnabled(false);
     }//GEN-LAST:event_jB_7ActionPerformed
 
     private void jB_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_8ActionPerformed
         joga(7);
+        jB_8.setEnabled(false);
     }//GEN-LAST:event_jB_8ActionPerformed
 
     private void jB_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_9ActionPerformed
         joga(8);
+        jB_9.setEnabled(false);
     }//GEN-LAST:event_jB_9ActionPerformed
 
     /**
