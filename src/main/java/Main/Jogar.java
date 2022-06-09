@@ -22,6 +22,7 @@ public class Jogar extends javax.swing.JFrame {
         habilitaTudo();
         quemJoga = quemComeca();
         resetaGrid();
+        jB_Revanche.setEnabled(false);
     }
     
     private void limpaTudo() {
@@ -46,15 +47,15 @@ public class Jogar extends javax.swing.JFrame {
         jB_7.setEnabled(true);
         jB_8.setEnabled(true);
         jB_9.setEnabled(true);
-        jB_1.setBackground(new Color(255,255,255));
-        jB_2.setBackground(new Color(255,255,255));
-        jB_3.setBackground(new Color(255,255,255));
-        jB_4.setBackground(new Color(255,255,255));
-        jB_5.setBackground(new Color(255,255,255));
-        jB_6.setBackground(new Color(255,255,255));
-        jB_7.setBackground(new Color(255,255,255));
-        jB_8.setBackground(new Color(255,255,255));
-        jB_9.setBackground(new Color(255,255,255));
+        jP_B1.setBackground(new Color(255,255,255));
+        jP_B2.setBackground(new Color(255,255,255));
+        jP_B3.setBackground(new Color(255,255,255));
+        jP_B4.setBackground(new Color(255,255,255));
+        jP_B5.setBackground(new Color(255,255,255));
+        jP_B6.setBackground(new Color(255,255,255));
+        jP_B7.setBackground(new Color(255,255,255));
+        jP_B8.setBackground(new Color(255,255,255));
+        jP_B9.setBackground(new Color(255,255,255));
     }
 
     private void resetaGrid() {
@@ -101,6 +102,7 @@ public class Jogar extends javax.swing.JFrame {
         jB_6 = new javax.swing.JButton();
         jB_Menu = new javax.swing.JButton();
         jL_MensagemJogo = new javax.swing.JLabel();
+        jB_Revanche = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -129,6 +131,7 @@ public class Jogar extends javax.swing.JFrame {
         jL_Credito.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jL_Credito.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_Credito.setText("Por Rafael Ferreira Goulart");
+        jL_Credito.setToolTipText("https://github.com/RafaelEtec/Jogo_da_Velha");
 
         jL_JogoDaVelha.setFont(new java.awt.Font("Pristina", 1, 36)); // NOI18N
         jL_JogoDaVelha.setText("#");
@@ -414,7 +417,7 @@ public class Jogar extends javax.swing.JFrame {
                         .addGroup(jP_BGJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jP_B3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jP_B6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jP_BGJogoLayout.setVerticalGroup(
             jP_BGJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,6 +453,15 @@ public class Jogar extends javax.swing.JFrame {
         jL_MensagemJogo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jL_MensagemJogo.setText("mensagem");
 
+        jB_Revanche.setBackground(new java.awt.Color(153, 153, 153));
+        jB_Revanche.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jB_Revanche.setText("Revanche");
+        jB_Revanche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_RevancheActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jP_BGBottomLayout = new javax.swing.GroupLayout(jP_BGBottom);
         jP_BGBottom.setLayout(jP_BGBottomLayout);
         jP_BGBottomLayout.setHorizontalGroup(
@@ -459,6 +471,8 @@ public class Jogar extends javax.swing.JFrame {
                 .addGroup(jP_BGBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jP_BGBottomLayout.createSequentialGroup()
                         .addComponent(jL_MensagemJogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jB_Revanche, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jB_Menu))
                     .addComponent(jP_BGJogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -470,9 +484,11 @@ public class Jogar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jP_BGJogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jP_BGBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jB_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_MensagemJogo))
+                .addGroup(jP_BGBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jP_BGBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jB_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jL_MensagemJogo))
+                    .addComponent(jB_Revanche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -554,6 +570,7 @@ public class Jogar extends javax.swing.JFrame {
             if (ganhou) {
                 desabilitaBotoes();
                 resetaGrid();
+                jB_Revanche.setEnabled(true);
             } else {
                 proxJoga();
                 jogada--;
@@ -563,6 +580,7 @@ public class Jogar extends javax.swing.JFrame {
         if (jogada == 0 && !ganhou) {
             jL_MensagemJogo.setText("Empate! Ninguém venceu.");
             resetaGrid();
+            jB_Revanche.setEnabled(true);
         }
     }
     
@@ -638,6 +656,14 @@ public class Jogar extends javax.swing.JFrame {
             jL_MensagemJogo.setText("Vencedor: " + ganhador + " ,Parabéns!");
         }
         return ganhou;
+    }
+    
+    private void revanche() {
+        limpaTudo();
+        habilitaTudo();
+        quemJoga = quemComeca();
+        resetaGrid();
+        jB_Revanche.setEnabled(false);
     }
     
     private void mudaBotao(int botao) {
@@ -729,6 +755,10 @@ public class Jogar extends javax.swing.JFrame {
         jB_9.setEnabled(false);
     }//GEN-LAST:event_jB_9ActionPerformed
 
+    private void jB_RevancheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_RevancheActionPerformed
+        revanche();
+    }//GEN-LAST:event_jB_RevancheActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -775,6 +805,7 @@ public class Jogar extends javax.swing.JFrame {
     private javax.swing.JButton jB_8;
     private javax.swing.JButton jB_9;
     private javax.swing.JButton jB_Menu;
+    private javax.swing.JButton jB_Revanche;
     private javax.swing.JLabel jL_Credito;
     private javax.swing.JLabel jL_JogoDaVelha;
     private javax.swing.JLabel jL_MensagemJogo;
@@ -793,22 +824,5 @@ public class Jogar extends javax.swing.JFrame {
     private javax.swing.JPanel jP_BGTittle;
     private javax.swing.JPanel jP_BGTop;
     private javax.swing.JPanel jP_Background;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
-    private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
     // End of variables declaration//GEN-END:variables
 }

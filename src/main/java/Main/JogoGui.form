@@ -145,6 +145,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="Por Rafael Ferreira Goulart"/>
+                <Property name="toolTipText" type="java.lang.String" value="https://github.com/RafaelEtec/Jogo_da_Velha"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jL_JogoDaVelha">

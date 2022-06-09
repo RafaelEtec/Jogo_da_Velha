@@ -71,6 +71,7 @@ public class JogoGui extends javax.swing.JFrame {
         jL_Credito.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jL_Credito.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jL_Credito.setText("Por Rafael Ferreira Goulart");
+        jL_Credito.setToolTipText("https://github.com/RafaelEtec/Jogo_da_Velha");
 
         jL_JogoDaVelha.setFont(new java.awt.Font("Pristina", 1, 36)); // NOI18N
         jL_JogoDaVelha.setText("#");
@@ -339,14 +340,12 @@ public class JogoGui extends javax.swing.JFrame {
     private javax.swing.JLabel jL_NomeP1;
     private javax.swing.JLabel jL_NomeP2;
     private javax.swing.JLabel jL_TikTakToe;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jP_BGBottom;
     private javax.swing.JPanel jP_BGP1;
     private javax.swing.JPanel jP_BGP2;
     private javax.swing.JPanel jP_BGTittle;
     private javax.swing.JPanel jP_BGTop;
     private javax.swing.JPanel jP_Background;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTF_P1;
     private javax.swing.JTextField jTF_P2;
     // End of variables declaration//GEN-END:variables
