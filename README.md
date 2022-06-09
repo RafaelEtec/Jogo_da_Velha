@@ -6,6 +6,7 @@
 \
   Aqui você encontrará o Jogo da Velha feito em Java \
   Nas seguintes especificações: \
+  \
     Jogo.java     - Feito com base num Vetor Unidimensional \
     JogoBiDi.java - Feito com base num Vetor BiDimensional \
     JogoGui.Java & Jogar.java - Jogo com uma Interface Gráfica! (JFrame)
