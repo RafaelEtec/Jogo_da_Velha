@@ -4,15 +4,16 @@
  */
 package Main;
 
+import java.awt.Color;
+
 /**
  *
  * @author raf
  */
 public class JogoGui extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JogoGui
-     */
+    public static String nomeP1, nomeP2;
+    
     public JogoGui() {
         initComponents();
         jL_Mensagem.setText("");
@@ -107,6 +108,12 @@ public class JogoGui extends javax.swing.JFrame {
         jL_NomeP1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jL_NomeP1.setText("Nome Jogador 1:");
 
+        jTF_P1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_P1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jP_BGP1Layout = new javax.swing.GroupLayout(jP_BGP1);
         jP_BGP1.setLayout(jP_BGP1Layout);
         jP_BGP1Layout.setHorizontalGroup(
@@ -132,6 +139,12 @@ public class JogoGui extends javax.swing.JFrame {
 
         jL_NomeP2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jL_NomeP2.setText("Nome Jogador 2:");
+
+        jTF_P2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_P2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jP_BGP2Layout = new javax.swing.GroupLayout(jP_BGP2);
         jP_BGP2.setLayout(jP_BGP2Layout);
@@ -233,16 +246,49 @@ public class JogoGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_JogarActionPerformed
-        if (!confereNomes()) {
-            
+        if (confereNomes()) {
+            nomeP1 = jTF_P1.getText();
+            nomeP2 = jTF_P2.getText();
         }
     }//GEN-LAST:event_jB_JogarActionPerformed
+
+    private void jTF_P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_P1ActionPerformed
+        confereNomes();
+    }//GEN-LAST:event_jTF_P1ActionPerformed
+
+    private void jTF_P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_P2ActionPerformed
+        confereNomes();
+    }//GEN-LAST:event_jTF_P2ActionPerformed
     
     public boolean confereNomes() {
-        boolean confereNomes = false;
+        boolean confereNomes = true;
+        String t1 = "", t2 = "", t3 = "";
         if (jTF_P1.getText().equals("")) {
-            
+            t1 = "Insira o nome do Jogador 1  ";
+            confereNomes = false;
+            jP_BGP1.setBackground(Color.red);
+        } else {
+            jP_BGP1.setBackground(new Color(153,153,153));
         }
+        if (jTF_P2.getText().equals("")) {
+            t2 = "Insira o nome do Jogador 2";
+            confereNomes = false;
+            jP_BGP2.setBackground(Color.red);
+        } else {
+            jP_BGP2.setBackground(new Color(153,153,153));
+        }
+        if (!jTF_P1.getText().equals("") && !jTF_P2.getText().equals("")) {
+            if (jTF_P1.getText().equals(jTF_P2.getText())) {
+                t3 = "Os nomes não podem ser Iguais!";
+                confereNomes = false;
+                jP_BGP1.setBackground(Color.red);
+                jP_BGP2.setBackground(Color.red);
+            } else {
+                jP_BGP1.setBackground(new Color(153,153,153));
+                jP_BGP2.setBackground(new Color(153,153,153));
+            }
+        }
+        jL_Mensagem.setText(t1 + t2 + t3);
         return confereNomes;
     }
     
