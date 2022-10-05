@@ -1,0 +1,48 @@
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : null
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Fae
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Fae
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Fae
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Rafa
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Gaersa
+| - - - - - - - - - - - - |
+
+

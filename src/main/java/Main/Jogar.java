@@ -4,7 +4,15 @@
  */
 package Main;
 
+import java.io.IOException;
 import java.awt.Color;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +23,7 @@ public class Jogar extends javax.swing.JFrame {
     private static double quemJoga;
     private static int jogada = 9;
     private static int[] grid = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+    private static String nomeP1 = JogoGui.nomeP1, nomeP2 = JogoGui.nomeP2;
     
     public Jogar() {
         initComponents();
@@ -561,7 +570,7 @@ public class Jogar extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jB_MenuActionPerformed
 
-    private void joga(int botao) {
+    private void joga(int botao) throws IOException {
         boolean ganhou = false;
         if (jogada > 0) {
             mandaJogada(botao);
@@ -596,7 +605,7 @@ public class Jogar extends javax.swing.JFrame {
         jB_9.setEnabled(false);
     }
     
-    private boolean verificaVencedor() {
+    private boolean verificaVencedor() throws IOException {
         boolean ganhou = false;
         String ganhador;
         if (quemJoga == 0) {
@@ -605,8 +614,7 @@ public class Jogar extends javax.swing.JFrame {
             ganhador = JogoGui.nomeP2;
         }
         if (jogada <= 5) {
-            // Horizontal
-            if        (grid[0] == 0 && grid[1] == 0 && grid[2] == 0 || grid[0] == 1 && grid[1] == 1 && grid[2] == 1) {
+            if        (grid[0] == 0 && grid[1] == 0 && grid[2] == 0 || grid[0] == 1 && grid[1] == 1 && grid[2] == 1) { // Horizontal
                 ganhou = true;
                 jP_B1.setBackground(Color.red);
                 jP_B2.setBackground(Color.red);
@@ -621,9 +629,7 @@ public class Jogar extends javax.swing.JFrame {
                 jP_B7.setBackground(Color.red);
                 jP_B8.setBackground(Color.red);
                 jP_B9.setBackground(Color.red);
-            }
-            //Vertical
-            if        (grid[0] == 0 && grid[3] == 0 && grid[6] == 0 || grid[0] == 1 && grid[3] == 1 && grid[6] == 1) {
+            } else if (grid[0] == 0 && grid[3] == 0 && grid[6] == 0 || grid[0] == 1 && grid[3] == 1 && grid[6] == 1) { // Vertical
                 ganhou = true;
                 jP_B1.setBackground(Color.red);
                 jP_B4.setBackground(Color.red);
@@ -638,9 +644,7 @@ public class Jogar extends javax.swing.JFrame {
                 jP_B3.setBackground(Color.red);
                 jP_B6.setBackground(Color.red);
                 jP_B9.setBackground(Color.red);
-            }
-            // Diagonal
-            if        (grid[0] == 0 && grid[4] == 0 && grid[8] == 0 || grid[0] == 1 && grid[4] == 1 && grid[8] == 1) {
+            } else if (grid[0] == 0 && grid[4] == 0 && grid[8] == 0 || grid[0] == 1 && grid[4] == 1 && grid[8] == 1) { // Diagonal
                 ganhou = true;
                 jP_B1.setBackground(Color.red);
                 jP_B5.setBackground(Color.red);
@@ -654,8 +658,32 @@ public class Jogar extends javax.swing.JFrame {
         }
         if (ganhou) {
             jL_MensagemJogo.setText("Vencedor: " + ganhador + " ,Parabéns!");
+            salvaJogo(ganhador);
         }
         return ganhou;
+    }
+    
+    public static void salvaJogo(String ganhador) throws IOException {
+        Path historico = Path.of("./TikTakToe/historico.txt");
+        boolean exists = Files.exists(Path.of("./TikTakToe"));
+        
+        if (exists) {
+            System.out.println("Salvando partida...");
+        } else {
+            Path arquivos = Files.createDirectory(Path.of("./TikTakToe"));
+            System.out.println("Novo diretório:" + arquivos.toAbsolutePath());
+            historico = Files.createFile(arquivos.resolve("historico.txt"));
+            System.out.println("Novo arquivo:" + historico.toAbsolutePath());
+        }
+        
+        Files.writeString(historico,
+                  "| - - - Tik Tak Toe - - - |\n"
+                + "| P1  - " + nomeP1 + "\n"
+                + "| P2  - " + nomeP2 + "\n"
+                + "|\n"
+                + "| Ganhador : " + ganhador + "\n"
+                + "| - - - - - - - - - - - - |" + "\n\n\n"
+            ,StandardCharsets.ISO_8859_1, StandardOpenOption.APPEND);
     }
     
     private void revanche() {
@@ -711,47 +739,83 @@ public class Jogar extends javax.swing.JFrame {
     }
     
     private void jB_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_1ActionPerformed
-        joga(0);
+        try {
+            joga(0);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_1.setEnabled(false);
     }//GEN-LAST:event_jB_1ActionPerformed
 
     private void jB_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_2ActionPerformed
-        joga(1);
+        try {
+            joga(1);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_2.setEnabled(false);
     }//GEN-LAST:event_jB_2ActionPerformed
 
     private void jB_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_3ActionPerformed
-        joga(2);
+        try {
+            joga(2);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_3.setEnabled(false);
     }//GEN-LAST:event_jB_3ActionPerformed
 
     private void jB_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_4ActionPerformed
-        joga(3);
+        try {
+            joga(3);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_4.setEnabled(false);
     }//GEN-LAST:event_jB_4ActionPerformed
 
     private void jB_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_5ActionPerformed
-        joga(4);
+        try {
+            joga(4);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_5.setEnabled(false);
     }//GEN-LAST:event_jB_5ActionPerformed
 
     private void jB_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_6ActionPerformed
-        joga(5);
+        try {
+            joga(5);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_6.setEnabled(false);
     }//GEN-LAST:event_jB_6ActionPerformed
 
     private void jB_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_7ActionPerformed
-        joga(6);
+        try {
+            joga(6);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_7.setEnabled(false);
     }//GEN-LAST:event_jB_7ActionPerformed
 
     private void jB_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_8ActionPerformed
-        joga(7);
+        try {
+            joga(7);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_8.setEnabled(false);
     }//GEN-LAST:event_jB_8ActionPerformed
 
     private void jB_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_9ActionPerformed
-        joga(8);
+        try {
+            joga(8);
+        } catch (IOException ex) {
+            Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jB_9.setEnabled(false);
     }//GEN-LAST:event_jB_9ActionPerformed
 
