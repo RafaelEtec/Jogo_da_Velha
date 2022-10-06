@@ -46,3 +46,75 @@
 | - - - - - - - - - - - - |
 
 
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Ra
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Ra
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Fa
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Faer
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Faer
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - null
+| P2  - null
+|
+| Ganhador : Empate!
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafa
+| P2  - Ersa
+|
+| Ganhador : Ersa
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - sa
+|
+| Ganhador : sa
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - sa
+|
+| Ganhador : sa
+| - - - - - - - - - - - - |
+
+

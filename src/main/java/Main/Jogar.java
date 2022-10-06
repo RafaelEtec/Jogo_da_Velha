@@ -587,9 +587,11 @@ public class Jogar extends javax.swing.JFrame {
         }
         
         if (jogada == 0 && !ganhou) {
+            String emp = "Empate!";
             jL_MensagemJogo.setText("Empate! Ninguém venceu.");
             resetaGrid();
             jB_Revanche.setEnabled(true);
+            salvaJogo(emp);
         }
     }
     
@@ -678,8 +680,8 @@ public class Jogar extends javax.swing.JFrame {
         
         Files.writeString(historico,
                   "| - - - Tik Tak Toe - - - |\n"
-                + "| P1  - " + nomeP1 + "\n"
-                + "| P2  - " + nomeP2 + "\n"
+                + "| P1  - " + JogoGui.nomeP1 + "\n"
+                + "| P2  - " + JogoGui.nomeP2 + "\n"
                 + "|\n"
                 + "| Ganhador : " + ganhador + "\n"
                 + "| - - - - - - - - - - - - |" + "\n\n\n"
