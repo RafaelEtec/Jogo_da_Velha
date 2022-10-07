@@ -12,7 +12,7 @@ import java.awt.Color;
  */
 public class JogoGui extends javax.swing.JFrame {
 
-    public static String nomeP1, nomeP2;
+    public static String nomeP1, nomeP2, guardaNome;
     
     public JogoGui() {
         initComponents();
@@ -43,6 +43,7 @@ public class JogoGui extends javax.swing.JFrame {
         jTF_P2 = new javax.swing.JTextField();
         jB_Jogar = new javax.swing.JButton();
         jL_Mensagem = new javax.swing.JLabel();
+        jCB_PC = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -123,7 +124,7 @@ public class JogoGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jL_NomeP1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTF_P1)
+                .addComponent(jTF_P1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jP_BGP1Layout.setVerticalGroup(
@@ -181,6 +182,15 @@ public class JogoGui extends javax.swing.JFrame {
         jL_Mensagem.setForeground(new java.awt.Color(255, 0, 0));
         jL_Mensagem.setText("mensagem");
 
+        jCB_PC.setFont(new java.awt.Font("Stencil", 0, 12)); // NOI18N
+        jCB_PC.setText("HARDCORE");
+        jCB_PC.setToolTipText("Jogue contra o Computador!");
+        jCB_PC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_PCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jP_BGBottomLayout = new javax.swing.GroupLayout(jP_BGBottom);
         jP_BGBottom.setLayout(jP_BGBottomLayout);
         jP_BGBottomLayout.setHorizontalGroup(
@@ -191,7 +201,11 @@ public class JogoGui extends javax.swing.JFrame {
                     .addComponent(jP_BGP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jP_BGP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jB_Jogar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jL_Mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jP_BGBottomLayout.createSequentialGroup()
+                        .addGroup(jP_BGBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCB_PC)
+                            .addComponent(jL_Mensagem))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jP_BGBottomLayout.setVerticalGroup(
@@ -202,10 +216,12 @@ public class JogoGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jP_BGP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jL_Mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addComponent(jCB_PC)
+                .addGap(4, 4, 4)
+                .addComponent(jL_Mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_Jogar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jP_BackgroundLayout = new javax.swing.GroupLayout(jP_Background);
@@ -247,10 +263,21 @@ public class JogoGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_JogarActionPerformed
-        if (confereNomes()) {
-            nomeP1 = jTF_P1.getText();
-            nomeP2 = jTF_P2.getText();
-            
+        boolean passa = false;
+        if (jCB_PC.isSelected()) {
+            if (confereNomePC()) {
+                passa = true;
+            }
+        } else {
+            if (confereNomes()) {
+                passa = true;
+            }
+        }
+        
+        if (passa) {
+            nomeP2 = jTF_P2.getText().trim();
+            nomeP1 = jTF_P1.getText().trim();
+
             Jogar jogo = new Jogar();
             jogo.setVisible(true);
             this.setVisible(false);
@@ -264,6 +291,43 @@ public class JogoGui extends javax.swing.JFrame {
     private void jTF_P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_P2ActionPerformed
         confereNomes();
     }//GEN-LAST:event_jTF_P2ActionPerformed
+
+    private void jCB_PCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_PCActionPerformed
+        if (jCB_PC.isSelected()) {
+            jTF_P2.setEnabled(false);
+            guardaNome = jTF_P2.getText().trim();
+            jP_BGP1.setBackground(new Color(153,153,153));
+            jP_BGP2.setBackground(new Color(153,153,153));
+            jTF_P2.setText("COMPUTADOR");
+            jL_Mensagem.setText("");
+        } else {
+            jTF_P2.setEnabled(true);
+            jTF_P2.setText(guardaNome);
+        }
+    }//GEN-LAST:event_jCB_PCActionPerformed
+    
+    public boolean confereNomePC() {
+        boolean confereNomePC = true;
+        String t1 = "", t3 =  "";
+        if (jTF_P1.getText().equals("")) {
+            t1 = "Insira o nome do Jogador 1  ";
+            confereNomePC = false;
+            jP_BGP1.setBackground(Color.red);
+        } else {
+            jP_BGP1.setBackground(new Color(153,153,153));
+        }
+        if (!jTF_P1.getText().trim().equals("") && !jTF_P2.getText().trim().equals("")) {
+            if (jTF_P1.getText().trim().equals(jTF_P2.getText().trim())) {
+                t3 = "Os nomes não podem ser Iguais!";
+                confereNomePC = false;
+                jP_BGP1.setBackground(Color.red);
+            } else {
+                jP_BGP1.setBackground(new Color(153,153,153));
+            }
+        }
+        jL_Mensagem.setText(t1 + t3);
+        return confereNomePC;
+    }
     
     public boolean confereNomes() {
         boolean confereNomes = true;
@@ -334,6 +398,7 @@ public class JogoGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Jogar;
+    private javax.swing.JCheckBox jCB_PC;
     private javax.swing.JLabel jL_Credito;
     private javax.swing.JLabel jL_JogoDaVelha;
     private javax.swing.JLabel jL_Mensagem;

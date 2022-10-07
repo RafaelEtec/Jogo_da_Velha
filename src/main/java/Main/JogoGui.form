@@ -174,7 +174,13 @@
                           <Component id="jP_BGP1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jP_BGP2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jB_Jogar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jL_Mensagem" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCB_PC" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jL_Mensagem" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -188,10 +194,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jP_BGP2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jL_Mensagem" pref="21" max="32767" attributes="0"/>
+                      <Component id="jCB_PC" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="jL_Mensagem" pref="26" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jB_Jogar" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -211,7 +219,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jL_NomeP1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTF_P1" max="32767" attributes="0"/>
+                          <Component id="jTF_P1" pref="255" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -317,6 +325,18 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="mensagem"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCB_PC">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Stencil" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="HARDCORE"/>
+                <Property name="toolTipText" type="java.lang.String" value="Jogue contra o Computador!"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCB_PCActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

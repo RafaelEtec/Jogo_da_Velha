@@ -118,3 +118,211 @@
 | - - - - - - - - - - - - |
 
 
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - Limas
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - Limas
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - Limas
+|
+| Ganhador : Limas
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - Limas
+|
+| Ganhador : Limas
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - Limas
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - R
+| P2  - r
+|
+| Ganhador : Empate!
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - R
+| P2  - A
+|
+| Ganhador : R
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - Fa 
+|
+| Ganhador : Empate!
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - Fa 
+|
+| Ganhador : Ra
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Empate!
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : PC
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Empate!
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - PC
+|
+| Ganhador : Rafael
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - 
+| P2  - Computador
+|
+| Ganhador : 
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafael
+| P2  - COMPUTADOR
+|
+| Ganhador : COMPUTADOR
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - r
+| P2  - ar
+|
+| Ganhador : ar
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - COMPUTADOR
+|
+| Ganhador : Ra
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafa
+| P2  - COMPUTADOR
+|
+| Ganhador : Rafa
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Rafa
+| P2  - COMPUTADOR
+|
+| Ganhador : COMPUTADOR
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Ra
+| P2  - COMPUTADOR
+|
+| Ganhador : COMPUTADOR
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Raf
+| P2  - afa
+|
+| Ganhador : Raf
+| - - - - - - - - - - - - |
+
+
+| - - - Tik Tak Toe - - - |
+| P1  - Raf
+| P2  - afa
+|
+| Ganhador : afa
+| - - - - - - - - - - - - |
+
+

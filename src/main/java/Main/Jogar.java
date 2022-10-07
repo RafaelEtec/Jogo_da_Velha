@@ -25,13 +25,14 @@ public class Jogar extends javax.swing.JFrame {
     private static int[] grid = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
     private static String nomeP1 = JogoGui.nomeP1, nomeP2 = JogoGui.nomeP2;
     
-    public Jogar() {
+    public Jogar() throws IOException {
         initComponents();
         limpaTudo();
         habilitaTudo();
         quemJoga = quemComeca();
         resetaGrid();
         jB_Revanche.setEnabled(false);
+        joga(-1);
     }
     
     private void limpaTudo() {
@@ -570,19 +571,34 @@ public class Jogar extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jB_MenuActionPerformed
 
+//    private int jogadaPC() {
+//        int botao;
+//        
+////        if () {
+////            
+////        }
+//        
+//        return botao;
+//    }
+    
     private void joga(int botao) throws IOException {
         boolean ganhou = false;
-        if (jogada > 0) {
-            mandaJogada(botao);
-            mudaBotao(botao);
-            ganhou = verificaVencedor();
-            if (ganhou) {
-                desabilitaBotoes();
-                resetaGrid();
-                jB_Revanche.setEnabled(true);
-            } else {
-                proxJoga();
-                jogada--;
+        if (botao != -1) {
+            if (jogada > 0) {
+//                if (quemJoga == 1) {
+//                    botao = jogadaPC();
+//                }
+                mandaJogada(botao);
+                mudaBotao(botao);
+                ganhou = verificaVencedor();
+                if (ganhou) {
+                    desabilitaBotoes();
+                    resetaGrid();
+                    jB_Revanche.setEnabled(true);
+                } else {
+                    proxJoga();
+                    jogada--;
+                }
             }
         }
         
@@ -659,7 +675,7 @@ public class Jogar extends javax.swing.JFrame {
             }
         }
         if (ganhou) {
-            jL_MensagemJogo.setText("Vencedor: " + ganhador + " ,Parabéns!");
+            jL_MensagemJogo.setText("Vencedor: " + ganhador + ", Parabéns!");
             salvaJogo(ganhador);
         }
         return ganhou;
@@ -855,7 +871,11 @@ public class Jogar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Jogar().setVisible(true);
+                try {
+                    new Jogar().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Jogar.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
